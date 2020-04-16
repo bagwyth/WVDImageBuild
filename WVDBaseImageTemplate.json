@@ -65,16 +65,13 @@
             ],
             "distribute": [
                 {   
-                    "type": "sharedImage",
-                    "galleryImageId": "/subscriptions/4d2e8de2-eea6-4697-8be1-e7338bb3f867/resourceGroups/RG-AzImgBuild-Test01/providers/Microsoft.Compute/galleries/WVDBaseImages",
+                    "type": "ManagedImage",
+                    "ImageId": "WVDBaseImage",
                     "runOutputName": "WVDBaseImage",
                     "artifactTags": {
                         "source": "azVmImageBuilder",
                         "baseosimg": "windowsdesktopoffice365"
-                    },
-                    "replicationRegions": [
-                        "eastus"
-                    ]
+                    }
                 }
             ]
         }
