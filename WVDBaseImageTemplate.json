@@ -66,13 +66,10 @@
             "distribute": [
                 {
                     "type": "ManagedImage",
-                    "ImageId": "/subscriptions/4d2e8de2-eea6-4697-8be1-e7338bb3f867/resourceGroups/RG-AzImgBuild-Test01/providers/Microsoft.Compute/images/WVDBaseImage",
+                    "imageId": "/subscriptions/4d2e8de2-eea6-4697-8be1-e7338bb3f867/resourceGroups/RG-AzImgBuild-Test01/providers/Microsoft.Compute/images/WVDBaseImage",
                     "location": "eastus",
                     "runOutputName": "WVDBaseImage",
-                    "artifactTags": {
-                        "source": "azVmImageBuilder",
-                        "baseosimg": "windowsdesktopoffice365"
-                    }
+                    "artifactTags": { }
                 }
             ]
         }
