@@ -68,6 +68,7 @@
                     "type": "ManagedImage",
                     "ImageId": "/subscriptions/4d2e8de2-eea6-4697-8be1-e7338bb3f867/resourceGroups/RG-AzImgBuild-Test01/providers/Microsoft.Compute/images/WVDBaseImage",
                     "runOutputName": "WVDBaseImage",
+                    "location": "eastus",
                     "artifactTags": {
                         "source": "azVmImageBuilder",
                         "baseosimg": "windowsdesktopoffice365"
