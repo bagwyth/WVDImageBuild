@@ -31,7 +31,7 @@
                 "type": "PowerShell",
                 "name": "CreateBuildPath",
                 "runElevated": false,
-                "scriptUri": "https://raw.githubusercontent.com/danielsollondon/azvmimagebuilder/master/testPsScript.ps1"
+                "scriptUri": "https://raw.githubusercontent.com/bagwyth/WVDImageBuild/master/WVDClientAppInstalls.ps1"
             },
             {
                 "type": "WindowsRestart",

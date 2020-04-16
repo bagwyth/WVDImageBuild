@@ -1,5 +1,7 @@
 #Script to download and install software onto a golden image with Azure Image Builder
 
+New-Item -Path 'c:\buildArtifacts' -ItemType Directory -Force | Out-Null
+
 #Create temp folder
 New-Item -Path 'C:\temp' -ItemType Directory -Force | Out-Null
 
