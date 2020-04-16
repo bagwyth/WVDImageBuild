@@ -38,12 +38,6 @@
                 },
                 {
                     "type": "PowerShell",
-                    "name": "ClientAppInstalls",
-                    "runElevated": true,
-                    "scriptUri": "https://raw.githubusercontent.com/bagwyth/WVDImageBuild/master/WVDClientAppInstalls.ps1"
-                },
-                {
-                    "type": "PowerShell",
                     "name": "settingUpMgmtAgtPath",
                     "runElevated": false,
                     "inline": [
