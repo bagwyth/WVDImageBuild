@@ -39,7 +39,7 @@
                 {
                     "type": "PowerShell",
                     "name": "ClientAppInstalls",
-                    "runElevated": false,
+                    "runElevated": true,
                     "scriptUri": "https://raw.githubusercontent.com/bagwyth/WVDImageBuild/master/WVDClientAppInstalls.ps1"
                 },
                 {
@@ -74,5 +74,11 @@
             ]
         }
     }
-    ]
+    ],
+    "outputs": {
+        "ImageTemplateName": {
+            "type": "string",
+            "value": "imageTemplateName"
+        }
+    }
 }
