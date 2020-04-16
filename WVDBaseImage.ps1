@@ -2,7 +2,7 @@
 
 #Set Variables - Resource Group to deploy into and the ARM template we use later
 $RG = "RG-AzImgBuild-Test01"
-$TemplateUri = "https://raw.githubusercontent.com/bagwyth/WVDImageBuild/master/WVDBaseImageTemplate.json"
+$TemplateUri = "https://raw.githubusercontent.com/bagwyth/WVDImageBuild/master/armTemplateWin.json"
 
 #Install AZ if not already installed and login
 # Install-Module Az -Force
