@@ -52,7 +52,7 @@
             {
                 "type": "File",
                 "name": "downloadBuildArtifacts",
-                "sourceUri": "https://raw.githubusercontent.com/bagwyth/WVDImageBuild/master/exampleArtifacts/buildArtifacts/test.txt",
+                "sourceUri": "https://raw.githubusercontent.com/bagwyth/WVDImageBuild/master/buildArtifacts/test.txt",
                 "destination":"c:\\temp\\test.txt"
             }
         ],
