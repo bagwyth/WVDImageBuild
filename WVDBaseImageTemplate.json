@@ -1,0 +1,74 @@
+{
+    "type": "Microsoft.VirtualMachineImages/imageTemplates",
+    "apiVersion": "2019-05-01-preview",
+    "location": "eastus",
+    "dependsOn": [],
+    "tags": {
+        "imagebuilderTemplate": "WVDOffice365"
+    },
+    "properties": {
+        "buildTimeoutInMinutes" : 100,
+        "vmProfile": {
+            "vmSize": "Standard_D1_v2",
+            "osDiskSizeGB": 127
+        },
+        "source": {
+            "type": "PlatformImage",
+            "publisher": "microsoftwindowsdesktop",
+            "offer": "office-365",
+            "sku": "19h2-evd-o365pp",
+            "version": "latest"
+        },
+        "customize": [
+            {
+                "type": "WindowsUpdate",
+                "searchCriteria": "IsInstalled=0",
+                "filters": [
+                    "exclude:$_.Title -like '*Preview*'",
+                    "include:$true"
+                ],
+                "updateLimit": 20
+            },
+            {
+                "type": "PowerShell",
+                "name": "ClientAppInstalls",
+                "runElevated": false,
+                "scriptUri": "https://raw.githubusercontent.com/bagwyth/WVDImageBuild/master/WVDClientAppInstalls.ps1"
+            },
+            {
+                "type": "PowerShell",
+                "name": "settingUpMgmtAgtPath",
+                "runElevated": false,
+                "inline": [
+                    "mkdir c:\\temp",
+                    "echo Azure-Image-Builder-Was-Here  > c:\\temp\\buildActionsOutput.txt"
+                ]
+            },
+            {
+                "type": "WindowsRestart",
+                "restartCheckCommand": "echo Azure-Image-Builder-Restarted-the-VM  > c:\\temp\\azureImageBuilderRestart.txt",
+                "restartTimeout": "5m"
+            },
+            {
+                "type": "File",
+                "name": "downloadBuildArtifacts",
+                "sourceUri": "https://raw.githubusercontent.com/bagwyth/WVDImageBuild/master/exampleArtifacts/buildArtifacts/test.txt",
+                "destination":"c:\\temp\\test.txt"
+            }
+        ],
+        "distribute": [
+            {   
+                "type":"sharedImage",
+                "galleryImageId": "/subscriptions/4d2e8de2-eea6-4697-8be1-e7338bb3f867/resourceGroups/RG-AzImgBuild-Test01/providers/Microsoft.Compute/galleries/WVDBaseImages",
+                "runOutputName": "WVDBaseImage",
+                "artifactTags": {
+                    "source": "azVmImageBuilder",
+                    "baseosimg": "windowsdesktopoffice365"
+                },
+                "replicationRegions": [
+                    "eastus"
+                ]
+            }
+        ]
+    }
+}
