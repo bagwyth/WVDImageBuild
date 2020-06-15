@@ -56,9 +56,9 @@ $currentAzureContext = Get-AzContext
 ### Step 2: Get instance profile
 $azureRmProfile = [Microsoft.Azure.Commands.Common.Authentication.Abstractions.AzureRmProfileProvider]::Instance.Profile
 $profileClient = New-Object Microsoft.Azure.Commands.ResourceManager.Common.RMProfileClient($azureRmProfile)
-    
+
 Write-Verbose ("Tenant: {0}" -f  $currentAzureContext.Subscription.Name)
- 
-### Step 4: Get token  
+
+### Step 4: Get token
 $token = $profileClient.AcquireAccessToken($currentAzureContext.Tenant.TenantId)
 $accessToken=$token.AccessToken
