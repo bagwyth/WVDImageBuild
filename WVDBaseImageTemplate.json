@@ -17,7 +17,7 @@
         "identity": {
             "type": "UserAssigned",
             "userAssignedIdentities": {
-                "AzImgBuilderSvcId": {}                
+                "/subscriptions/4d2e8de2-eea6-4697-8be1-e7338bb3f867/resourcegroups/WVDPoC-WestCentralUS/providers/Microsoft.ManagedIdentity/userAssignedIdentities/AzImgBuilderSvcId": {}                
             }
         },
         "properties": {
