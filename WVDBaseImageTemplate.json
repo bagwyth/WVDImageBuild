@@ -23,7 +23,7 @@
                 "type": "PlatformImage",
                 "publisher": "microsoftwindowsdesktop",
                 "offer": "office-365",
-                "sku": "19h2-evd-o365pp",
+                "sku": "20h1-evd-o365pp",
                 "version": "latest"
             },
         "customize": [
@@ -70,6 +70,18 @@
                     "location": "eastus",
                     "runOutputName": "WVDBaseImage",
                     "artifactTags": { }
+                },
+                {   
+                    "type": "SharedImage",
+                    "galleryImageId": "/subscriptions/4d2e8de2-eea6-4697-8be1-e7338bb3f867/resourceGroups/RG-AzImgBuild-Test01/providers/Microsoft.Compute/galleries/SIGWVDPoCWestCentralUS/images/WVDBaseImage",
+                    "runOutputName": "WVDBaseImage",
+                    "artifactTags": {
+                        "source": "azureVmImageBuilder",
+                        "baseosimg": "windows2019"
+                    },
+                    "replicationRegions": [
+                      "westcentralus"
+                    ]
                 }
             ]
         }
