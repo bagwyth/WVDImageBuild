@@ -11,7 +11,14 @@
         "location": "eastus",
         "dependsOn": [],
         "tags": {
-            "imagebuilderTemplate": "WVDOffice365"
+            "imagebuilderTemplate": "WVDOffice365",
+            "userIdentity": "enabled"
+        },
+        "identity": {
+            "type": "UserAssigned",
+            "userAssignedIdentities": {
+                "AzImgBuilderSvcId": {}                
+            }
         },
         "properties": {
             "buildTimeoutInMinutes" : 100,
