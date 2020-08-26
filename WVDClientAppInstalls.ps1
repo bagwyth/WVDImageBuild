@@ -3,6 +3,9 @@
 #Create folder to store build artifacts
 New-Item -Path 'c:\buildArtifacts' -ItemType Directory -Force | Out-Null
 
+#Create test folder
+New-Item -Path 'c:\buildArtifacts\test' -ItemType Directory -Force | Out-Null
+
 #Create temp folder
 New-Item -Path 'C:\temp' -ItemType Directory -Force | Out-Null
 
