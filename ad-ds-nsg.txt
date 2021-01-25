@@ -1,0 +1,558 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "networkSecurityGroups_AD_NSG_name": {
+            "defaultValue": "AD-NSG",
+            "type": "String"
+        },
+        "AD_NET_CDIR": {
+            "defaultValue": "10.10.1.0/24",
+            "type": "String"
+        },
+        "location": {
+            "type": "string",
+            "defaultValue": "[resourceGroup().location]",
+            "metadata": {
+                "description": "The location in which the resources should be deployed."
+            }
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "comments": "",
+            "type": "Microsoft.Network/networkSecurityGroups",
+            "name": "[parameters('networkSecurityGroups_AD_NSG_name')]",
+            "apiVersion": "2017-06-01",
+            "location": "[parameters('location')]",
+            "scale": null,
+            "properties": {
+                "provisioningState": "Succeeded",
+                "securityRules": [
+                    {
+                        "name": "allow_RDP_to_AD_Servers",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "protocol": "TCP",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "3389",
+                            "sourceAddressPrefix": "VirtualNetwork",
+                            "destinationAddressPrefix": "[parameters('AD_NET_CDIR')]",
+                            "access": "Allow",
+                            "priority": 120,
+                            "direction": "Inbound",
+                            "sourceAddressPrefixes": [],
+                            "destinationAddressPrefixes": []
+                        }
+                    },
+                    {
+                        "name": "allow_AD_SMTP",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "protocol": "TCP",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "25",
+                            "sourceAddressPrefix": "VirtualNetwork",
+                            "destinationAddressPrefix": "[parameters('AD_NET_CDIR')]",
+                            "access": "Allow",
+                            "priority": 121,
+                            "direction": "Inbound",
+                            "sourceAddressPrefixes": [],
+                            "destinationAddressPrefixes": []
+                        }
+                    },
+                    {
+                        "name": "allow_AD_WINS",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "protocol": "TCP",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "42",
+                            "sourceAddressPrefix": "VirtualNetwork",
+                            "destinationAddressPrefix": "[parameters('AD_NET_CDIR')]",
+                            "access": "Allow",
+                            "priority": 122,
+                            "direction": "Inbound",
+                            "sourceAddressPrefixes": [],
+                            "destinationAddressPrefixes": []
+                        }
+                    },
+                    {
+                        "name": "allow_AD_Repl",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "protocol": "TCP",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "135",
+                            "sourceAddressPrefix": "VirtualNetwork",
+                            "destinationAddressPrefix": "[parameters('AD_NET_CDIR')]",
+                            "access": "Allow",
+                            "priority": 123,
+                            "direction": "Inbound",
+                            "sourceAddressPrefixes": [],
+                            "destinationAddressPrefixes": []
+                        }
+                    },
+                    {
+                        "name": "allow_AD_NetBIOS",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "protocol": "TCP",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "137",
+                            "sourceAddressPrefix": "VirtualNetwork",
+                            "destinationAddressPrefix": "[parameters('AD_NET_CDIR')]",
+                            "access": "Allow",
+                            "priority": 124,
+                            "direction": "Inbound",
+                            "sourceAddressPrefixes": [],
+                            "destinationAddressPrefixes": []
+                        }
+                    },
+                    {
+                        "name": "allow_AD_netlogin",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "protocol": "TCP",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "139",
+                            "sourceAddressPrefix": "VirtualNetwork",
+                            "destinationAddressPrefix": "[parameters('AD_NET_CDIR')]",
+                            "access": "Allow",
+                            "priority": 125,
+                            "direction": "Inbound",
+                            "sourceAddressPrefixes": [],
+                            "destinationAddressPrefixes": []
+                        }
+                    },
+                    {
+                        "name": "allow_AD_LDAP",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "protocol": "TCP",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "389",
+                            "sourceAddressPrefix": "VirtualNetwork",
+                            "destinationAddressPrefix": "[parameters('AD_NET_CDIR')]",
+                            "access": "Allow",
+                            "priority": 126,
+                            "direction": "Inbound",
+                            "sourceAddressPrefixes": [],
+                            "destinationAddressPrefixes": []
+                        }
+                    },
+                    {
+                        "name": "allow_AD_LDAP_udp",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "protocol": "UDP",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "389",
+                            "sourceAddressPrefix": "VirtualNetwork",
+                            "destinationAddressPrefix": "[parameters('AD_NET_CDIR')]",
+                            "access": "Allow",
+                            "priority": 127,
+                            "direction": "Inbound",
+                            "sourceAddressPrefixes": [],
+                            "destinationAddressPrefixes": []
+                        }
+                    },
+                    {
+                        "name": "allow_AD_LDAPS",
+                           "properties": {
+                            "provisioningState": "Succeeded",
+                            "protocol": "TCP",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "636",
+                            "sourceAddressPrefix": "VirtualNetwork",
+                            "destinationAddressPrefix": "[parameters('AD_NET_CDIR')]",
+                            "access": "Allow",
+                            "priority": 128,
+                            "direction": "Inbound",
+                            "sourceAddressPrefixes": [],
+                            "destinationAddressPrefixes": []
+                        }
+                    },
+                    {
+                        "name": "allow_AD_LDAP_GC",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "protocol": "TCP",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "3268-3269",
+                            "sourceAddressPrefix": "VirtualNetwork",
+                            "destinationAddressPrefix": "[parameters('AD_NET_CDIR')]",
+                            "access": "Allow",
+                            "priority": 129,
+                            "direction": "Inbound",
+                            "sourceAddressPrefixes": [],
+                            "destinationAddressPrefixes": []
+                        }
+                    },
+                    {
+                        "name": "allow_AD_KRB",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "protocol": "TCP",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "88",
+                            "sourceAddressPrefix": "VirtualNetwork",
+                            "destinationAddressPrefix": "[parameters('AD_NET_CDIR')]",
+                            "access": "Allow",
+                            "priority": 130,
+                            "direction": "Inbound",
+                            "sourceAddressPrefixes": [],
+                            "destinationAddressPrefixes": []
+                        }
+                    },
+                    {
+                        "name": "allow_AD_KRB_udp",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "protocol": "UDP",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "88",
+                            "sourceAddressPrefix": "VirtualNetwork",
+                            "destinationAddressPrefix": "[parameters('AD_NET_CDIR')]",
+                            "access": "Allow",
+                            "priority": 131,
+                            "direction": "Inbound",
+                            "sourceAddressPrefixes": [],
+                            "destinationAddressPrefixes": []
+                        }
+                    },
+                    {
+                        "name": "allow_AD_DNS",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "protocol": "TCP",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "53",
+                            "sourceAddressPrefix": "VirtualNetwork",
+                            "destinationAddressPrefix": "[parameters('AD_NET_CDIR')]",
+                            "access": "Allow",
+                            "priority": 132,
+                            "direction": "Inbound",
+                            "sourceAddressPrefixes": [],
+                            "destinationAddressPrefixes": []
+                        }
+                    },
+                    {
+                        "name": "allow_AD_DNS_udp",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "protocol": "UDP",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "53",
+                            "sourceAddressPrefix": "VirtualNetwork",
+                            "destinationAddressPrefix": "[parameters('AD_NET_CDIR')]",
+                            "access": "Allow",
+                            "priority": 133,
+                            "direction": "Inbound",
+                            "sourceAddressPrefixes": [],
+                            "destinationAddressPrefixes": []
+                        }
+                    },
+                    {
+                        "name": "allow_AD_445",
+                      "properties": {
+                        "provisioningState": "Succeeded",
+                        "protocol": "TCP",
+                        "sourcePortRange": "*",
+                        "destinationPortRange": "445",
+                        "sourceAddressPrefix": "VirtualNetwork",
+                        "destinationAddressPrefix": "[parameters('AD_NET_CDIR')]",
+                        "access": "Allow",
+                        "priority": 134,
+                        "direction": "Inbound",
+                        "sourceAddressPrefixes": [],
+                        "destinationAddressPrefixes": []
+                      }
+                    },
+                    {
+                        "name": "allow_AD_445_udp",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "protocol": "UDP",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "445",
+                            "sourceAddressPrefix": "VirtualNetwork",
+                            "destinationAddressPrefix": "[parameters('AD_NET_CDIR')]",
+                            "access": "Allow",
+                            "priority": 135,
+                            "direction": "Inbound",
+                            "sourceAddressPrefixes": [],
+                            "destinationAddressPrefixes": []
+                        }
+                    },
+                    {
+                        "name": "allow_AD_SOAP",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "protocol": "TCP",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "9389",
+                            "sourceAddressPrefix": "VirtualNetwork",
+                            "destinationAddressPrefix": "[parameters('AD_NET_CDIR')]",
+                            "access": "Allow",
+                            "priority": 136,
+                            "direction": "Inbound",
+                            "sourceAddressPrefixes": [],
+                            "destinationAddressPrefixes": []
+                        }
+                    },
+                    {
+                        "name": "allow_AD_DFSR",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "protocol": "TCP",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "5722",
+                            "sourceAddressPrefix": "VirtualNetwork",
+                            "destinationAddressPrefix": "[parameters('AD_NET_CDIR')]",
+                            "access": "Allow",
+                            "priority": 137,
+                            "direction": "Inbound",
+                            "sourceAddressPrefixes": [],
+                            "destinationAddressPrefixes": []
+                        }
+                    },
+                    {
+                        "name": "allow_AD_KRB2",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "protocol": "TCP",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "464",
+                            "sourceAddressPrefix": "VirtualNetwork",
+                            "destinationAddressPrefix": "[parameters('AD_NET_CDIR')]",
+                            "access": "Allow",
+                            "priority": 138,
+                            "direction": "Inbound",
+                            "sourceAddressPrefixes": [],
+                            "destinationAddressPrefixes": []
+                        }
+                    },
+                    {
+                        "name": "allow_AD_KRB2_udp",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "protocol": "UDP",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "464",
+                            "sourceAddressPrefix": "VirtualNetwork",
+                            "destinationAddressPrefix": "[parameters('AD_NET_CDIR')]",
+                            "access": "Allow",
+                            "priority": 139,
+                            "direction": "Inbound",
+                            "sourceAddressPrefixes": [],
+                            "destinationAddressPrefixes": []
+                        }
+                    },
+                    {
+                        "name": "allow_AD_time",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "protocol": "UDP",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "123",
+                            "sourceAddressPrefix": "VirtualNetwork",
+                            "destinationAddressPrefix": "[parameters('AD_NET_CDIR')]",
+                            "access": "Allow",
+                            "priority": 140,
+                            "direction": "Inbound",
+                            "sourceAddressPrefixes": [],
+                            "destinationAddressPrefixes": []
+                        }
+                    },
+                    {
+                        "name": "allow_AD_auth",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "protocol": "UDP",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "137-138",
+                            "sourceAddressPrefix": "VirtualNetwork",
+                            "destinationAddressPrefix": "[parameters('AD_NET_CDIR')]",
+                            "access": "Allow",
+                            "priority": 141,
+                            "direction": "Inbound",
+                            "sourceAddressPrefixes": [],
+                            "destinationAddressPrefixes": []
+                        }
+                    },
+                    {
+                        "name": "allow_AD_ephemeral",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "protocol": "TCP",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "49152-65535",
+                            "sourceAddressPrefix": "VirtualNetwork",
+                            "destinationAddressPrefix": "[parameters('AD_NET_CDIR')]",
+                            "access": "Allow",
+                            "priority": 142,
+                            "direction": "Inbound",
+                            "sourceAddressPrefixes": [],
+                            "destinationAddressPrefixes": []
+                        }
+                    },
+                    {
+                        "name": "allow_AD_ephemeral_udp",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "protocol": "UDP",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "49152-65535",
+                            "sourceAddressPrefix": "VirtualNetwork",
+                            "destinationAddressPrefix": "[parameters('AD_NET_CDIR')]",
+                            "access": "Allow",
+                            "priority": 143,
+                            "direction": "Inbound",
+                            "sourceAddressPrefixes": [],
+                            "destinationAddressPrefixes": []
+                        }
+                    },
+                    {
+                        "name": "deny_AD_Other_TCP",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "protocol": "TCP",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "*",
+                            "sourceAddressPrefix": "*",
+                            "destinationAddressPrefix": "[parameters('AD_NET_CDIR')]",
+                            "access": "Deny",
+                            "priority": 200,
+                            "direction": "Inbound",
+                            "sourceAddressPrefixes": [],
+                            "destinationAddressPrefixes": []
+                        }
+                    },
+                    {
+                        "name": "deny_AD_Other_UDP",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "protocol": "UDP",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "*",
+                            "sourceAddressPrefix": "*",
+                            "destinationAddressPrefix": "[parameters('AD_NET_CDIR')]",
+                            "access": "Deny",
+                            "priority": 201,
+                            "direction": "Inbound",
+                            "sourceAddressPrefixes": [],
+                            "destinationAddressPrefixes": []
+                        }
+                    }
+                ],
+                "defaultSecurityRules": [
+                    {
+                        "name": "AllowVnetInBound",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "description": "Allow inbound traffic from all VMs in VNET",
+                            "protocol": "*",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "*",
+                            "sourceAddressPrefix": "VirtualNetwork",
+                            "destinationAddressPrefix": "VirtualNetwork",
+                            "access": "Allow",
+                            "priority": 65000,
+                            "direction": "Inbound",
+                            "sourceAddressPrefixes": [],
+                            "destinationAddressPrefixes": []
+                        }
+                    },
+                    {
+                        "name": "AllowAzureLoadBalancerInBound",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "description": "Allow inbound traffic from azure load balancer",
+                            "protocol": "*",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "*",
+                            "sourceAddressPrefix": "AzureLoadBalancer",
+                            "destinationAddressPrefix": "*",
+                            "access": "Allow",
+                            "priority": 65001,
+                            "direction": "Inbound",
+                            "sourceAddressPrefixes": [],
+                            "destinationAddressPrefixes": []
+                        }
+                    },
+                    {
+                        "name": "DenyAllInBound",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "description": "Deny all inbound traffic",
+                            "protocol": "*",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "*",
+                            "sourceAddressPrefix": "*",
+                            "destinationAddressPrefix": "*",
+                            "access": "Deny",
+                            "priority": 65500,
+                            "direction": "Inbound",
+                            "sourceAddressPrefixes": [],
+                            "destinationAddressPrefixes": []
+                        }
+                    },
+                    {
+                        "name": "AllowVnetOutBound",
+                         "properties": {
+                            "provisioningState": "Succeeded",
+                            "description": "Allow outbound traffic from all VMs to all VMs in VNET",
+                            "protocol": "*",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "*",
+                            "sourceAddressPrefix": "VirtualNetwork",
+                            "destinationAddressPrefix": "VirtualNetwork",
+                            "access": "Allow",
+                            "priority": 65000,
+                            "direction": "Outbound",
+                            "sourceAddressPrefixes": [],
+                            "destinationAddressPrefixes": []
+                        }
+                    },
+                    {
+                        "name": "AllowInternetOutBound",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "description": "Allow outbound traffic from all VMs to Internet",
+                            "protocol": "*",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "*",
+                            "sourceAddressPrefix": "*",
+                            "destinationAddressPrefix": "Internet",
+                            "access": "Allow",
+                            "priority": 65001,
+                            "direction": "Outbound",
+                            "sourceAddressPrefixes": [],
+                            "destinationAddressPrefixes": []
+                        }
+                    },
+                    {
+                        "name": "DenyAllOutBound",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "description": "Deny all outbound traffic",
+                            "protocol": "*",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "*",
+                            "sourceAddressPrefix": "*",
+                            "destinationAddressPrefix": "*",
+                            "access": "Deny",
+                            "priority": 65500,
+                            "direction": "Outbound",
+                            "sourceAddressPrefixes": [],
+                            "destinationAddressPrefixes": []
+                        }
+                    }
+                ]
+            },
+            "dependsOn": []
+        }
+       ]
+}
